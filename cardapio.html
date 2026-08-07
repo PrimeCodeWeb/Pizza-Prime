@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="Pt-Br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pizza Prime</title>
+  <link rel="stylesheet" href="cardapio.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+</head>
+
+<body>
+  <header>
+    <img class="logo_pizza" src="pizza_logo.png" width="100px" alt="logo" />
+    <div class="botoes">
+      <button class="btn1"><a href="index.html">INICIO</a></button>
+      <button class="btn2"><a href="cardapio.html">CARDÁPIO</a></button>
+      <button class="btn3"><a href="sobrenos.html">SOBRE NÓS</a></button>
+      <button class="btn4"><a href="avaliacoes.html">AVALIAÇÕES</a></button>
+      <button class="btn5"><a href="contato.html">CONTATO</a></button>
+      <button class="btn6">
+        <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
+      </button>
+      <button id="btn_pedido">
+        <a id="fazer_pedido" href="">FAZER PEDIDO</a>
+      </button>
+    </div>
+
+    <i class="fa-solid fa-bars menu-hamburguer"></i>
+  </header>
+
+  <nav class="links_cardapio">
+    <h1 class="titulo_cardapio">NOSSO CARDÁPIO</h1>
+    <p class="subtitulo_cardapio">
+      Escolha sua pizza favorita e faça seu pedido
+    </p>
+
+    <div class="links">
+      <a href="">TODAS</a>
+      <a href="">TRADICIONAIS</a>
+      <a href="">ESPECIAIS</a>
+      <a href="">BEBIDAS</a>
+      <a href="">PROMOÇÕES</a>
+      <a href="">CARRINHO</a>
+
+
+    </div>
+  </nav>
+
+
+  <nav class="cards">
+    <div class="card1">
+      <img width="170px" src="pizza.calabresa.jpg" alt="pizza_calabresa" />
+      <h1>Calabresa</h1>
+      <p>⭐⭐⭐⭐⭐</p>
+      <p>R$49,90</p>
+      <button onclick="adicionarCarrinho('Calabresa', 49.90)">Adicionar</button>
+    </div>
+
+    <div class="card2">
+      <img width="200px" src="pizza.portuguesa.jpg" alt="pizza_calabresa" />
+      <h1>Portuguesa</h1>
+      <p>⭐⭐⭐⭐⭐</p>
+      <p>R$49,90</p>
+      <button onclick="adicionarCarrinho('Portuguesa', 49.90)">Adicionar</button>
+    </div>
+
+    <div class="card3">
+      <img width="170px" src="pizza.quatroqueijos.jpg" alt="pizza_calabresa" />
+      <h1>Quatro Queijos</h1>
+      <p>⭐⭐⭐⭐⭐</p>
+      <p>R$49,90</p>
+      <button onclick="adicionarCarrinho('Quatro Queijos', 49.90)">Adicionar</button>
+    </div>
+
+    <div class="card4">
+      <img width="170px" src="frango.com.catupiry.jpg" alt="pizza_calabresa" />
+      <h1>Frango com catupiry</h1>
+      <p>⭐⭐⭐⭐⭐</p>
+      <p>R$49,90</p>
+      <button onclick="adicionarCarrinho('Frango com Catupiry', 49.90)">Adicionar</button>
+    </div>
+
+    <div class="card5">
+      <img width="170px" src="Marguerita.pizza.jpg" alt="pizza_calabresa" />
+      <h1>Marguerita</h1>
+      <p>⭐⭐⭐⭐⭐</p>
+      <p>R$49,90</p>
+      <button onclick="adicionarCarrinho('Marguerita', 49.90)">Adicionar</button>
+    </div>
+
+    <div class="card6">
+      <img width="170px" src="pizza.calabresa.jpg" alt="pizza_calabresa" />
+      <h1>Calabresa</h1>
+      <p>⭐⭐⭐⭐⭐</p>
+      <p>R$49,90</p>
+      <button onclick="adicionarCarrinho('Calabresa', 49.90)">Adicionar</button>
+    </div>
+  </nav>
+</body>
+
+</html>
+
+<script>
+  const menu = document.querySelector(".botoes");
+  const botao = document.querySelector(".menu-hamburguer");
+
+  botao.addEventListener("click", () => {
+    menu.classList.toggle("ativo");
+  });
+
+  let carrinho = [];
+
+function adicionarCarrinho(nome, preco) {
+
+    carrinho.push({
+        nome,
+        preco
+    });
+
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+    );
+
+    console.log(carrinho);
+}
+
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+</script>

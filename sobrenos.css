@@ -1,0 +1,197 @@
+/* ===========================
+   BODY
+=========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+   background-image: url(fundo_cardápio.png);
+   overflow-x: hidden;
+   font-family: Arial, Helvetica, sans-serif;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    background-repeat: repeat;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+header {
+  width: 100%;
+  background: #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  position: relative;
+  min-width: auto;
+}
+
+.logo_pizza {
+  border-radius: 8px;
+}
+
+.botoes {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: red;
+}
+
+#btn_pedido {
+  background: red;
+  padding: 10px 18px;
+  border-radius: 6px;
+}
+
+#fazer_pedido:hover {
+  color: white;
+}
+
+/* ===========================
+   MENU HAMBÚRGUER
+=========================== */
+
+
+
+@media screen and (max-width:768px){
+
+    header{
+        padding: 15px 20px;
+    }
+
+    .botoes{
+        display: none;
+    }
+
+    .menu-hamburguer{
+        display: block;
+    }
+
+    .botoes.ativo{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: #111;
+        padding: 20px;
+        gap: 20px;
+    }
+
+}
+
+.menu-hamburguer {
+  display: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.titulo{
+  text-align: center;
+  color: white;
+  margin-top: 30px;
+  text-decoration: underline yellow;  
+}
+
+.subtitulo{
+  color: white;
+  margin-top: 35px;
+  margin-left: 30px;
+}
+
+.texto{
+  color: silver;
+  margin-left: 32px;
+  margin-top: 20px;
+}
+
+.continuacao_texto{
+  color: silver;
+  margin-left: 33px;
+  margin-top: 15px;
+}
+
+.imgs{
+  margin-top: 30px;
+  margin-left: 33px;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: center;
+
+}
+
+.imgs > p{
+ color: white;
+}
+
+.pizza_icone{
+  color: white;
+  text-align: center;
+}
+
+.fogaoalenha_icone{
+   color: white;
+  text-align: center;
+}
+
+.entrega_rapida_icone{
+   color: white;
+  text-align: center;
+}
+
+.fazerpedido{
+  margin-top: 20px;
+}
+
+.fazerpedido > a{
+  background-color: red;
+  padding: 6px 7px 8px;
+  margin-left: 34px;
+}
+
+.fazerpedido > a:hover{
+  color: white;
+}
+
+.nossahistoria_titulo{
+  color: white;
+  margin-top: 20px;
+  margin-left: 36px;
+}
+
+.nossahistoria_paragrafo{
+  color: silver;
+  margin-top: 25px;
+  margin-left: 37px;
+}
+
+
+.tudo{
+  text-align: center;
+}

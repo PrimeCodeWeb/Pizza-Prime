@@ -1,0 +1,209 @@
+/* ===========================
+   BODY
+=========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+   background-image: url(fundo_cardápio.png);
+   overflow-x: hidden;
+   font-family: Arial, Helvetica, sans-serif;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    background-repeat: repeat;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+header {
+  width: 100%;
+  background: #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  position: relative;
+  min-width: auto;
+}
+
+.logo_pizza {
+  border-radius: 8px;
+}
+
+.botoes {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: red;
+}
+
+#btn_pedido {
+  background: red;
+  padding: 10px 18px;
+  border-radius: 6px;
+}
+
+#fazer_pedido:hover {
+  color: white;
+}
+
+/* ===========================
+   MENU HAMBÚRGUER
+=========================== */
+
+
+
+@media screen and (max-width:768px){
+
+    header{
+        padding: 15px 20px;
+    }
+
+    .botoes{
+        display: none;
+    }
+
+    .menu-hamburguer{
+        display: block;
+    }
+
+    .botoes.ativo{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: #111;
+        padding: 20px;
+        gap: 20px;
+    }
+
+}
+
+.menu-hamburguer {
+  display: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* ===========================
+   AREA TITULO
+=========================== */
+
+.titulo{
+    color: white;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.sub_titulo{
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* ===========================
+   AREA avaliação
+=========================== */
+
+
+#area_avaliacoes{
+    display: flex;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+   align-items: center;
+}
+
+.avaliacoes{
+    color: white;
+}
+/* ===========================
+   TABELA
+=========================== */
+
+
+.tabela{
+  color: white;
+}
+
+.barra5{
+    background-color: yellow;
+    width: 200px;
+    height: 10px;
+    border-radius: 8px;
+}
+
+.barra4{
+    background-color: yellow;
+    width: 100px;
+    height: 10px;
+    border-radius: 8px;
+}
+
+.barra3{
+    background-color: yellow;
+    width: 50px;
+    height: 10px;
+    border-radius: 8px;
+}
+
+.barra2{
+    background-color: yellow;
+    width: 30px;
+    height: 10px;
+    border-radius: 8px;
+}
+
+.barra1{
+    background-color: yellow;
+    width: 15px;
+    height: 10px;
+    border-radius: 8px;
+}
+
+/* ===========================
+   AVALIAÇÕES DOS CLIENTES
+=========================== */
+
+#area_clientes{
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    gap: 30px;
+}
+
+.cliente1, .cliente2, .cliente3{
+    color: white;
+    text-align: center;
+
+}
+
+
+
+

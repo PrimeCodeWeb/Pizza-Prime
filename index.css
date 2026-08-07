@@ -1,0 +1,218 @@
+/* ===========================
+   RESET
+=========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: black;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+header {
+    background: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+}
+
+.logo_pizza {
+    border-radius: 8px;
+}
+
+.botoes {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn1:hover{
+border-bottom: 1px solid red;
+transition: 1s;
+}
+
+.btn2:hover{
+border-bottom: 1px solid red;
+transition: 1s;
+}
+
+.btn3:hover{
+border-bottom: 1px solid red;
+transition: 1s;
+}
+
+
+.btn4:hover{
+border-bottom: 1px solid red;
+transition: 1s;
+}
+
+.btn5:hover{
+border-bottom: 1px solid red;
+transition: 1s;
+}
+
+.btn6:hover{
+border-bottom: 1px solid red;
+transition: 1s;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    transition: .3s;
+}
+
+a:hover {
+    color: red;
+}
+
+#btn_pedido {
+    background: red;
+    border-radius: 5px;
+    padding: 10px 18px;
+}
+
+#fazer_pedido:hover {
+    color: white;
+}
+
+/* ===========================
+   MENU HAMBÚRGUER
+=========================== */
+
+.menu-hamburguer {
+    display: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+/* ===========================
+   BANNER
+=========================== */
+
+.banner {
+    text-align: center;
+}
+
+.banner img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+.btn_Banner {
+    margin-top: 20px;
+    width: 130px;
+    height: 50px;
+    background: red;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.banner button a:hover {
+    color: white;
+}
+
+/* ===========================
+   PIZZAS
+=========================== */
+
+.nav_Pizzas {
+    text-align: center;
+    color: white;
+    font-size: 28px;
+    text-decoration: underline;
+    margin: 40px 0;
+}
+
+.div_pizzas_cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card1,
+.card2,
+.card3,
+.card4 {
+    width: 200px;
+    border: 1px solid yellow;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    padding-bottom: 15px;
+}
+
+.pizza_calabresa,
+.pizza_portuguesa,
+.pizza_frangocomcatupiry,
+.pizza_quatroqueijos {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card1 p,
+.card2 p,
+.card3 p,
+.card4 p {
+    color: rgb(80,79,79);
+}
+
+.card1 span,
+.card2 span,
+.card3 span,
+.card4 span {
+    color: yellow;
+    font-weight: bold;
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media screen and (max-width:768px){
+
+    header{
+        padding: 15px 20px;
+    }
+
+    .botoes{
+        display: none;
+    }
+
+    .menu-hamburguer{
+        display: block;
+    }
+
+    .botoes.ativo{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: #111;
+        padding: 20px;
+        gap: 20px;
+    }
+
+}
