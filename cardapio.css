@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* ===========================
    BODY
 =========================== */
@@ -551,3 +552,558 @@ padding: 10px 10px 9px 9px;
 
 /* Button cards */
 
+=======
+/* ===========================
+   BODY
+=========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+   background-image: url(fundo_cardápio.png);
+   overflow-x: hidden;
+   font-family: Arial, Helvetica, sans-serif;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    background-repeat: repeat;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+header {
+  width: 100%;
+  background: #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  position: relative;
+  min-width: auto;
+}
+
+.logo_pizza {
+  border-radius: 8px;
+}
+
+.botoes {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: red;
+}
+
+#btn_pedido {
+  background: red;
+  padding: 10px 18px;
+  border-radius: 6px;
+}
+
+#fazer_pedido:hover {
+  color: white;
+}
+
+/* ===========================
+   MENU HAMBÚRGUER
+=========================== */
+
+.menu-hamburguer {
+  display: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media (max-width: 768px) {
+  header {
+    padding: 15px 20px;
+  }
+  body{
+    margin: auto;
+    padding: 0;
+  }
+
+  .menu-hamburguer {
+    display: block;
+  }
+
+  .botoes {
+    display: none;
+  }
+
+  .botoes.ativo {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 75px;
+    left: 0;
+    width: 100%;
+    background: #111;
+    padding: 20px;
+    gap: 15px;
+    z-index: 999;
+  }
+
+  .links > a {
+    display: flex;
+    margin: 10px;
+    background-color: rgb(0, 0, 0);
+    width: 30%;
+    height: 2.0px;
+    padding: 0px;
+    border-radius: 8px;
+    border: 1px solid yellow;
+    float: left;
+    justify-content: center;
+    margin-left: auto;
+  }
+
+  .links > a:hover {
+    color: red;
+  }
+
+ .links{
+  flex-wrap: wrap;
+ }
+  input {
+    border: 1px solid silver;
+    border-radius: 8px;
+    height: 38px;
+    background-color: black;
+    text-align: center;
+    color: white;
+  }
+
+  .card1{
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+   border-radius: 6px;
+    margin-top: 60px;
+    display: block;
+}
+
+ .card2{
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+   border-radius: 6px;
+    margin-top: 60px;
+    display: block;
+}
+  
+
+ .card3{
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+   border-radius: 6px;
+    margin-top: 60px;
+    display: block;
+}
+  
+
+ .card4{
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+  border-radius: 6px;
+  margin-top: 60px;
+  display: block;
+}
+  
+
+ .card5{
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+  border-radius: 6px;
+  margin-top: 60px;
+  display: block;
+}
+  
+
+ .card6{
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+   border-radius: 6px;
+    margin-top: 60px;
+    display: block;
+}
+  
+.cards{
+ display: flex;
+ flex-wrap: wrap;
+ gap: 10px;
+ justify-content: center;
+}
+
+
+}
+/* ===========================
+   BOTÕES CARDÁPIO
+=========================== */
+
+
+
+.titulo_cardapio {
+  color: white;
+  text-align: center;
+  font-size: 45px;
+  text-decoration: underline yellow;
+}
+
+.subtitulo_cardapio {
+  text-align: center;
+  color: white;
+  text-decoration: underline yellow ;
+}
+
+
+.links > button{
+ background-color: black;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid yellow;
+    margin: 10px;
+    float: left;
+}
+
+ input {
+    border: 1px solid silver;
+    border-radius: 8px;
+    height: 50px;
+    margin-right: 250px;
+    margin-top: 17px;
+    background-color: black;
+    text-align: center;
+    color: white;
+    margin-top: -50px;
+    margin-left: 50px;
+  }
+
+  
+
+  .links_cardapio{
+    text-align: center;
+  }
+
+  .links > a{
+     display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 130px;
+    height: 40px;
+
+    background: black;
+    border: 1px solid yellow;
+    border-radius: 5px;
+  }
+
+
+.links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* ===========================
+   CARDS PIZZAS
+=========================== */
+
+.cards{
+ display: flex;
+ flex-wrap: wrap;
+ gap: 10px;
+ justify-content: center;
+}
+
+/*COMEÇO CARD1 */
+
+.card1 > h1{
+  color: white;
+  
+}
+
+.card1 > p{
+  color: white;
+
+}
+
+.card1{
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+ border-radius: 6px;
+ margin-top: 60px;
+}
+
+.card1 > button{
+  color: white;
+  font-size: 22px;
+  background-color: red;
+  border-radius: 4px;
+    width: auto;
+    padding: 4px 4px 4px 4px;
+    margin-top: 8px;
+}
+
+.card1 > button:hover{
+padding: 10px 10px 9px 9px;
+}
+ 
+/*FINAL CARD1 */
+
+/*COMEÇO CARD2*/
+.card2 > h1{
+  color: white;
+  
+}
+
+.card2 > p{
+  color: white;
+
+}
+
+.card2{
+
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+ border-radius: 6px;
+ margin-top: 60px;
+}
+
+.card2 > img{
+  border-radius: 5px;
+  width: 190px;
+  height: 130px;
+}
+
+.card2 > button{
+  color: white;
+  font-size: 22px;
+  background-color: red;
+  border-radius: 4px;
+    width: auto;
+    padding: 4px 4px 4px 4px;
+   margin-top: 19px;
+  }
+
+  .card2 > button:hover{
+padding: 10px 10px 9px 9px;
+}
+
+/*FINAL CARD2*/
+
+
+/*COMEÇO CARD3 */
+.card3 > h1{
+  color: white;
+  
+}
+
+.card3 > p{
+  color: white;
+
+}
+
+.card3{
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+ border-radius: 6px;
+ margin-top: 60px;
+}
+
+.card3 > img{
+  border-radius: 5px;
+}
+
+.card3 > button{
+  color: white;
+  font-size: 22px;
+  background-color: red;
+  border-radius: 4px;
+    width: auto;
+    padding: 4px 4px 4px 4px;
+   margin-bottom: 2px;
+  }
+
+  .card3 > button:hover{
+padding: 10px 10px 9px 9px;
+}
+/*FINAL CARD3 */
+
+/*COMEÇO CARD4 */
+.card4 > h1{
+  color: white;
+  
+}
+
+.card4 > p{
+  color: white;
+
+}
+
+.card4{
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+ border-radius: 6px;
+ margin-top: 60px;
+}
+
+.card4 > img{
+  border-radius: 5px;
+}
+
+.card4 > button{
+  color: white;
+  font-size: 22px;
+  background-color: red;
+  border-radius: 4px;
+    width: auto;
+    padding: 4px 4px 4px 4px;
+    margin-top: 23px;
+}
+
+.card4 > button:hover{
+padding: 10px 10px 9px 9px;
+}
+
+/*FINAL CARD4*/
+
+/*COMEÇO CARD5 */
+.card5 > h1{
+  color: white;
+  
+}
+
+.card5 > p{
+  color: white;
+
+}
+
+.card5{
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+ border-radius: 6px;
+ margin-top: 60px;
+}
+
+.card5 > img{
+  border-radius: 5px;
+}
+
+.card5 > button{
+  color: white;
+  font-size: 22px;
+  background-color: red;
+  border-radius: 4px;
+    width: auto;
+    padding: 4px 4px 4px 4px;
+    margin-top: 36px;
+}
+
+.card5 > button:hover{
+padding: 10px 10px 9px 9px;
+}
+/*FINAL CARD5*/
+
+/*COMEÇO CARD6 */
+.card6 > h1{
+  color: white;
+  
+}
+
+.card6 > p{
+  color: white;
+
+}
+
+.card6{
+  background-color: black;
+  height: auto;
+  width: 200px;
+  text-align: center;
+  border: 1px solid yellow;
+ border-radius: 6px;
+ margin-top: 60px;
+}
+
+.card6 > img{
+  border-radius: 5px;
+}
+
+.card6 > button{
+  color: white;
+  font-size: 22px;
+  background-color: red;
+  border-radius: 4px;
+    width: auto;
+    padding: 4px 4px 4px 4px;
+   margin-top: 8px ;
+  }
+
+  .card6 > button:hover{
+padding: 10px 10px 9px 9px;
+}
+/*FINAL CARD6 */
+
+/* Button cards */
+
+>>>>>>> 5622c1b27440bbb313984163b5f2a09f86584e72
