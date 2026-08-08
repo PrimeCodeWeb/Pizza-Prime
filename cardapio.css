@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /* ===========================
    BODY
 =========================== */
@@ -552,7 +552,7 @@ padding: 10px 10px 9px 9px;
 
 /* Button cards */
 
-=======
+
 /* ===========================
    BODY
 =========================== */
@@ -578,15 +578,15 @@ body {
    HEADER
 =========================== */
 
-header {
-  width: 100%;
-  background: #000000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  position: relative;
-  min-width: auto;
+
+header{
+  margin-top: -20px;
+    width:100%;
+    background:#000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
 }
 
 .logo_pizza {
@@ -634,6 +634,7 @@ a:hover {
   color: white;
   font-size: 30px;
   cursor: pointer;
+
 }
 
 /* ===========================
@@ -1106,4 +1107,4 @@ padding: 10px 10px 9px 9px;
 
 /* Button cards */
 
->>>>>>> 5622c1b27440bbb313984163b5f2a09f86584e72
+

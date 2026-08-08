@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+ HEAD
 /* ===========================
    BODY
 =========================== */
@@ -213,7 +213,7 @@ a:hover {
 #btnFinalizar:hover{
     background:#c70000;
     transform:scale(1.05);
-=======
+}
 /* ===========================
    BODY
 =========================== */
@@ -428,5 +428,5 @@ a:hover {
 #btnFinalizar:hover{
     background:#c70000;
     transform:scale(1.05);
->>>>>>> 5622c1b27440bbb313984163b5f2a09f86584e72
+
 }

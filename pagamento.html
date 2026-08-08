@@ -1,9 +1,11 @@
-<<<<<<< HEAD
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Pagamento - Pizza Prime</title>
@@ -11,6 +13,7 @@
     <script src="https://sdk.mercadopago.com/js/v2"></script>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -67,7 +70,9 @@
         #paymentBrick_container {
             margin-top: 20px;
         }
+
     </style>
+
 </head>
 
 <body>
@@ -90,7 +95,7 @@
     <script>
 
         // ==========================================
-        // 1. RECUPERA O CARRINHO
+        // RECUPERA O CARRINHO
         // ==========================================
 
         const carrinho =
@@ -100,7 +105,7 @@
 
 
         // ==========================================
-        // 2. VERIFICA SE EXISTE PEDIDO
+        // VERIFICA SE EXISTE PEDIDO
         // ==========================================
 
         if (carrinho.length === 0) {
@@ -113,7 +118,7 @@
 
 
         // ==========================================
-        // 3. CALCULA O TOTAL
+        // CALCULA O TOTAL
         // ==========================================
 
         let total = 0;
@@ -126,7 +131,7 @@
 
 
         // ==========================================
-        // 4. MOSTRA RESUMO DO PEDIDO
+        // MOSTRA RESUMO
         // ==========================================
 
         const resumo =
@@ -170,351 +175,7 @@
 
 
         // ==========================================
-        // 5. PUBLIC KEY DO MERCADO PAGO
-        // ==========================================
-
-        const mp =
-            new MercadoPago(
-                "APP_USR-66092e6c-b0a6-4106-a647-57f8ace60f88",
-                {
-                    locale: "pt-BR"
-                }
-            );
-
-        const bricksBuilder = mp.bricks();
-
-
-        async function renderPaymentBrick() {
-
-            const settings = {
-
-                initialization: {
-                    amount: Number(total.toFixed(2))
-                },
-
-                customization: {
-
-                    paymentMethods: {
-                        creditCard: "all",
-                        debitCard: "all",
-                        bankTransfer: "all"
-                    }
-
-                },
-
-                callbacks: {
-
-                    onReady: () => {
-                        console.log("Payment Brick carregado! 🍕");
-                    },
-
-                    onSubmit: async ({
-                        selectedPaymentMethod,
-                        formData
-                    }) => {
-
-                        console.log(
-                            "Método escolhido:",
-                            selectedPaymentMethod
-                        );
-
-                        console.log(
-                            "Dados:",
-                            formData
-                        );
-
-                        try {
-
-                            const response =
-                                await fetch(
-                                    "http://localhost:3000/process_payment",
-                                    {
-                                        method: "POST",
-
-                                        headers: {
-                                            "Content-Type":
-                                                "application/json"
-                                        },
-
-                                        body:
-                                            JSON.stringify(formData)
-                                    }
-                                );
-
-                            const result =
-                                await response.json();
-
-                            console.log(
-                                "Resposta do servidor:",
-                                result
-                            );
-
-                            if (
-                                result.status ===
-                                "approved"
-                            ) {
-
-                                alert(
-                                    "Pagamento aprovado! 🎉🍕"
-                                );
-
-                                localStorage.removeItem(
-                                    "carrinho"
-                                );
-
-                                localStorage.removeItem(
-                                    "carrinhoPagamento"
-                                );
-
-                                window.location.href =
-                                    "index.html";
-
-                            }
-
-                            else if (
-                                result.status ===
-                                "pending"
-                            ) {
-
-                                alert(
-                                    "Pagamento pendente. Aguarde a confirmação."
-                                );
-
-                            }
-
-                            else {
-
-                                alert(
-                                    "Pagamento não aprovado."
-                                );
-
-                                console.log(result);
-
-                            }
-
-                        }
-
-                        catch (error) {
-
-                            console.error(
-                                "Erro ao processar pagamento:",
-                                error
-                            );
-
-                            alert(
-                                "Erro ao processar o pagamento."
-                            );
-
-                        }
-
-                    },
-
-                    onError: (error) => {
-
-                        console.error(
-                            "Erro no Payment Brick:",
-                            error
-                        );
-
-                    }
-
-                }
-
-            };
-
-
-            const paymentBrickController =
-                await bricksBuilder.create(
-                    "payment",
-                    "paymentBrick_container",
-                    settings
-                );
-
-
-            window.paymentBrickController =
-                paymentBrickController;
-
-        }
-
-
-        renderPaymentBrick();
-    </script>
-
-</body>
-
-=======
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Pagamento - Pizza Prime</title>
-
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            padding: 30px 15px;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-        }
-
-        .container {
-            max-width: 700px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .subtitulo {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        #resumoPedido {
-            margin-bottom: 30px;
-            padding: 20px;
-            background: #f7f7f7;
-            border-radius: 10px;
-        }
-
-        .item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .total {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        #paymentBrick_container {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="container">
-
-        <h1>🍕 Finalizar Pedido</h1>
-
-        <p class="subtitulo">
-            Confira seu pedido e escolha a forma de pagamento.
-        </p>
-
-        <div id="resumoPedido"></div>
-
-        <div id="paymentBrick_container"></div>
-
-    </div>
-
-
-    <script>
-
-        // ==========================================
-        // 1. RECUPERA O CARRINHO
-        // ==========================================
-
-        const carrinho =
-            JSON.parse(
-                localStorage.getItem("carrinhoPagamento")
-            ) || [];
-
-
-        // ==========================================
-        // 2. VERIFICA SE EXISTE PEDIDO
-        // ==========================================
-
-        if (carrinho.length === 0) {
-
-            alert("Nenhum pedido encontrado.");
-
-            window.location.href = "carrinho.html";
-
-        }
-
-
-        // ==========================================
-        // 3. CALCULA O TOTAL
-        // ==========================================
-
-        let total = 0;
-
-        carrinho.forEach(item => {
-
-            total += Number(item.preco);
-
-        });
-
-
-        // ==========================================
-        // 4. MOSTRA RESUMO DO PEDIDO
-        // ==========================================
-
-        const resumo =
-            document.getElementById("resumoPedido");
-
-
-        carrinho.forEach(item => {
-
-            resumo.innerHTML += `
-
-                <div class="item">
-
-                    <span>
-                        ${item.nome}
-                    </span>
-
-                    <strong>
-                        R$ ${Number(item.preco).toFixed(2)}
-                    </strong>
-
-                </div>
-
-            `;
-
-        });
-
-
-        resumo.innerHTML += `
-
-            <div class="total">
-
-                <span>Total</span>
-
-                <span>
-                    R$ ${total.toFixed(2)}
-                </span>
-
-            </div>
-
-        `;
-
-
-        // ==========================================
-        // 5. PUBLIC KEY DO MERCADO PAGO
+        // MERCADO PAGO
         // ==========================================
 
         const mp =
@@ -525,23 +186,38 @@
                 }
             );
 
-        const bricksBuilder = mp.bricks();
 
+        const bricksBuilder =
+            mp.bricks();
+
+
+        // ==========================================
+        // PAYMENT BRICK
+        // ==========================================
 
         async function renderPaymentBrick() {
 
             const settings = {
 
                 initialization: {
-                    amount: Number(total.toFixed(2))
+
+                    amount:
+                        Number(
+                            total.toFixed(2)
+                        )
+
                 },
 
                 customization: {
 
                     paymentMethods: {
+
                         creditCard: "all",
+
                         debitCard: "all",
+
                         bankTransfer: "all"
+
                     }
 
                 },
@@ -549,8 +225,13 @@
                 callbacks: {
 
                     onReady: () => {
-                        console.log("Payment Brick carregado! 🍕");
+
+                        console.log(
+                            "Payment Brick carregado! 🍕"
+                        );
+
                     },
+
 
                     onSubmit: async ({
                         selectedPaymentMethod,
@@ -567,11 +248,16 @@
                             formData
                         );
 
+
                         try {
+
+                            // IMPORTANTE:
+                            // Não usar localhost aqui.
+                            // O servidor é o próprio Render.
 
                             const response =
                                 await fetch(
-                                    "http://localhost:3000/process_payment",
+                                    "/process_payment",
                                     {
                                         method: "POST",
 
@@ -581,17 +267,22 @@
                                         },
 
                                         body:
-                                            JSON.stringify(formData)
+                                            JSON.stringify(
+                                                formData
+                                            )
                                     }
                                 );
 
+
                             const result =
                                 await response.json();
+
 
                             console.log(
                                 "Resposta do servidor:",
                                 result
                             );
+
 
                             if (
                                 result.status ===
@@ -602,18 +293,22 @@
                                     "Pagamento aprovado! 🎉🍕"
                                 );
 
+
                                 localStorage.removeItem(
                                     "carrinho"
                                 );
+
 
                                 localStorage.removeItem(
                                     "carrinhoPagamento"
                                 );
 
+
                                 window.location.href =
                                     "index.html";
 
                             }
+
 
                             else if (
                                 result.status ===
@@ -625,6 +320,7 @@
                                 );
 
                             }
+
 
                             else {
 
@@ -638,12 +334,14 @@
 
                         }
 
+
                         catch (error) {
 
                             console.error(
                                 "Erro ao processar pagamento:",
                                 error
                             );
+
 
                             alert(
                                 "Erro ao processar o pagamento."
@@ -652,6 +350,7 @@
                         }
 
                     },
+
 
                     onError: (error) => {
 
@@ -682,9 +381,10 @@
 
 
         renderPaymentBrick();
+
     </script>
 
 </body>
 
->>>>>>> 5622c1b27440bbb313984163b5f2a09f86584e72
 </html>
+```

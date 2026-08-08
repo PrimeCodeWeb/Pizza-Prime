@@ -1,276 +1,198 @@
-<<<<<<< HEAD
-<!doctype html>
-<html lang="Pt-Br">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pizza Prime</title>
-    <link rel="stylesheet" href="carrinho.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-
 <body>
-    <header>
-        <img class="logo_pizza" src="pizza_logo.png" width="100px" alt="logo" />
-        <div class="botoes">
-            <button class="btn1"><a href="index.html">INICIO</a></button>
-            <button class="btn2"><a href="cardapio.html">CARDÁPIO</a></button>
-            <button class="btn3"><a href="sobrenos.html">SOBRE NÓS</a></button>
-            <button class="btn4"><a href="avaliacoes.html">AVALIAÇÕES</a></button>
-            <button class="btn5"><a href="contato.html">CONTATO</a></button>
-            <button class="btn6">
-                <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
-            </button>
-            <div class="finalizar">
-                <h2 id="total"></h2>
+    
+</div>
+</div>
 
+<i class="fa-solid fa-bars menu-hamburguer"></i>
+</header>
 
-            </div>
-        </div>
+<h1 class="titulo">Seu Carrinho</h1>
 
-        <i class="fa-solid fa-bars menu-hamburguer"></i>
-    </header>
+<div id="listaCarrinho"></div>
 
-    <h1 class="titulo">Seu Carrinho</h1>
+<h2 id="total"></h2>
 
-    <div id="listaCarrinho"></div>
+<button id="btnFinalizar">
+    Finalizar Pedido
+</button>
 
-    <h2 id="total"></h2>
+<script>
 
-    <button id="btnFinalizar">Finalizar Pedido</button>
-  <script>
-    const menu = document.querySelector(".botoes");
-    const botao = document.querySelector(".menu-hamburguer");
+    // ==========================================
+    // RECUPERAR CARRINHO
+    // ==========================================
 
-    // Menu hambúrguer
-    botao.addEventListener("click", () => {
-        menu.classList.toggle("ativo");
-    });
+    const listaCarrinho =
+        document.getElementById("listaCarrinho");
 
-    // Busca o carrinho salvo
-    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    const totalElemento =
+        document.getElementById("total");
 
-    // Mostra os itens do carrinho
-    function mostrarCarrinho() {
-
-        const lista = document.getElementById("listaCarrinho");
-        const totalElemento = document.getElementById("total");
-
-        lista.innerHTML = "";
-
-        let total = 0;
-
-        if (carrinho.length === 0) {
-
-            lista.innerHTML = `
-                <div class="itemCarrinho">
-                    <div class="infoPizza">
-                        <h3>Seu carrinho está vazio 🍕</h3>
-                    </div>
-                </div>
-            `;
-
-            totalElemento.innerHTML = "Total: R$ 0,00";
-
-            return;
-        }
-
-        carrinho.forEach((item) => {
-
-            lista.innerHTML += `
-                <div class="itemCarrinho">
-
-                    <div class="infoPizza">
-                        <h3>${item.nome}</h3>
-                        <p>Pizza deliciosa preparada na hora.</p>
-                    </div>
-
-                    <div class="precoPizza">
-                        R$ ${Number(item.preco).toFixed(2)}
-                    </div>
-
-                </div>
-            `;
-
-            total += Number(item.preco);
-
-        });
-
-        totalElemento.innerHTML =
-            `Total: R$ ${total.toFixed(2)}`;
-    }
-
-
-    // Finalizar pedido
-    function finalizarPedido() {
-
-        if (carrinho.length === 0) {
-
-            alert("Seu carrinho está vazio!");
-
-            return;
-        }
-
-        // Salva o carrinho para a página de pagamento
-        localStorage.setItem(
-            "carrinhoPagamento",
-            JSON.stringify(carrinho)
-        );
-
-        // Vai para a página de pagamento
-        window.location.href = "pagamento.html";
-    }
-
-
-    // Botão Finalizar Pedido
     const btnFinalizar =
         document.getElementById("btnFinalizar");
 
-    btnFinalizar.addEventListener(
-        "click",
-        finalizarPedido
-    );
+
+    let carrinho =
+        JSON.parse(
+            localStorage.getItem("carrinho")
+        ) || [];
 
 
-    // Mostra o carrinho
-    mostrarCarrinho();
-=======
-<!doctype html>
-<html lang="Pt-Br">
+    // ==========================================
+    // MOSTRAR CARRINHO
+    // ==========================================
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pizza Prime</title>
-    <link rel="stylesheet" href="carrinho.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-</head>
-
-<body>
-    <header>
-        <img class="logo_pizza" src="pizza_logo.png" width="100px" alt="logo" />
-        <div class="botoes">
-            <button class="btn1"><a href="index.html">INICIO</a></button>
-            <button class="btn2"><a href="cardapio.html">CARDÁPIO</a></button>
-            <button class="btn3"><a href="sobrenos.html">SOBRE NÓS</a></button>
-            <button class="btn4"><a href="avaliacoes.html">AVALIAÇÕES</a></button>
-            <button class="btn5"><a href="contato.html">CONTATO</a></button>
-            <button class="btn6">
-                <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
-            </button>
-            <div class="finalizar">
-                <h2 id="total"></h2>
-
-
-            </div>
-        </div>
-
-        <i class="fa-solid fa-bars menu-hamburguer"></i>
-    </header>
-
-    <h1 class="titulo">Seu Carrinho</h1>
-
-    <div id="listaCarrinho"></div>
-
-    <h2 id="total"></h2>
-
-    <button id="btnFinalizar">Finalizar Pedido</button>
-  <script>
-    const menu = document.querySelector(".botoes");
-    const botao = document.querySelector(".menu-hamburguer");
-
-    // Menu hambúrguer
-    botao.addEventListener("click", () => {
-        menu.classList.toggle("ativo");
-    });
-
-    // Busca o carrinho salvo
-    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-    // Mostra os itens do carrinho
     function mostrarCarrinho() {
 
-        const lista = document.getElementById("listaCarrinho");
-        const totalElemento = document.getElementById("total");
-
-        lista.innerHTML = "";
+        listaCarrinho.innerHTML = "";
 
         let total = 0;
 
+
         if (carrinho.length === 0) {
 
-            lista.innerHTML = `
-                <div class="itemCarrinho">
-                    <div class="infoPizza">
-                        <h3>Seu carrinho está vazio 🍕</h3>
-                    </div>
-                </div>
+            listaCarrinho.innerHTML = `
+                <p style="
+                    text-align:center;
+                    font-size:18px;
+                    margin:30px 0;
+                ">
+                    Seu carrinho está vazio 🍕
+                </p>
             `;
 
-            totalElemento.innerHTML = "Total: R$ 0,00";
+            totalElemento.innerText =
+                "Total: R$ 0,00";
+
+            btnFinalizar.disabled = true;
 
             return;
         }
 
-        carrinho.forEach((item) => {
 
-            lista.innerHTML += `
-                <div class="itemCarrinho">
+        carrinho.forEach((item, index) => {
 
-                    <div class="infoPizza">
-                        <h3>${item.nome}</h3>
-                        <p>Pizza deliciosa preparada na hora.</p>
-                    </div>
+            const preco =
+                Number(item.preco) || 0;
 
-                    <div class="precoPizza">
-                        R$ ${Number(item.preco).toFixed(2)}
-                    </div>
+            total += preco;
+
+
+            const div =
+                document.createElement("div");
+
+            div.className = "item-carrinho";
+
+
+            div.innerHTML = `
+
+                <div>
+
+                    <strong>
+                        ${item.nome}
+                    </strong>
+
+                    <p>
+                        R$ ${preco.toFixed(2).replace(".", ",")}
+                    </p>
 
                 </div>
+
+                <button
+                    onclick="removerItem(${index})"
+                    style="
+                        cursor:pointer;
+                        padding:8px 12px;
+                        border:none;
+                        border-radius:8px;
+                    "
+                >
+                    🗑️
+                </button>
+
             `;
 
-            total += Number(item.preco);
+
+            listaCarrinho.appendChild(div);
 
         });
 
-        totalElemento.innerHTML =
-            `Total: R$ ${total.toFixed(2)}`;
+
+        totalElemento.innerText =
+            `Total: R$ ${total.toFixed(2).replace(".", ",")}`;
+
     }
 
 
-    // Finalizar pedido
-    function finalizarPedido() {
+    // ==========================================
+    // REMOVER ITEM
+    // ==========================================
 
-        if (carrinho.length === 0) {
+    function removerItem(index) {
 
-            alert("Seu carrinho está vazio!");
+        carrinho.splice(index, 1);
 
-            return;
-        }
-
-        // Salva o carrinho para a página de pagamento
         localStorage.setItem(
-            "carrinhoPagamento",
+            "carrinho",
             JSON.stringify(carrinho)
         );
 
-        // Vai para a página de pagamento
-        window.location.href = "pagamento.html";
+        mostrarCarrinho();
+
     }
 
 
-    // Botão Finalizar Pedido
-    const btnFinalizar =
-        document.getElementById("btnFinalizar");
+    // ==========================================
+    // FINALIZAR PEDIDO
+    // ==========================================
 
     btnFinalizar.addEventListener(
         "click",
-        finalizarPedido
+        function () {
+
+            if (carrinho.length === 0) {
+
+                alert(
+                    "Seu carrinho está vazio! 🍕"
+                );
+
+                return;
+            }
+
+
+            // Salva uma cópia específica
+            // para a página de pagamento
+
+            localStorage.setItem(
+                "carrinhoPagamento",
+                JSON.stringify(carrinho)
+            );
+
+
+            // Vai para o pagamento
+
+            window.location.href =
+                "pagamento.html";
+
+        }
     );
 
 
-    // Mostra o carrinho
+    // ==========================================
+    // INICIAR
+    // ==========================================
+
     mostrarCarrinho();
->>>>>>> 5622c1b27440bbb313984163b5f2a09f86584e72
+
 </script>
+
+
+</body>
+</html>
