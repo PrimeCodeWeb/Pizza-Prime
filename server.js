@@ -1,0 +1,307 @@
+const express = require("express");
+const cors = require("cors");
+const crypto = require("crypto");
+const path = require("path");
+const {
+    MercadoPagoConfig,
+    Payment
+} = require("mercadopago");
+
+require("dotenv").config();
+
+// ==================================================
+// SERVIDOR
+// ==================================================
+
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+
+// ==================================================
+// ARQUIVOS DO SITE
+// ==================================================
+
+app.use(express.static(__dirname));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+
+// ==================================================
+// MERCADO PAGO
+// ==================================================
+
+if (!process.env.MERCADOPAGO_ACCESS_TOKEN) {
+    console.error(
+        "❌ ERRO: MERCADOPAGO_ACCESS_TOKEN não encontrado."
+    );
+} else {
+    console.log(
+        "✅ Access Token do Mercado Pago carregado."
+    );
+}
+
+const client = new MercadoPagoConfig({
+    accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN
+});
+
+const payment = new Payment(client);
+
+// ==================================================
+// TESTE DO SERVIDOR
+// ==================================================
+
+app.get("/teste", (req, res) => {
+
+    res.json({
+        sucesso: true,
+        mensagem: "Servidor da Pizza Prime funcionando! 🍕"
+    });
+
+});
+
+// ==================================================
+// PROCESSAR PAGAMENTO
+// ==================================================
+
+app.post("/process_payment", async (req, res) => {
+
+    console.log("");
+    console.log("==============================");
+    console.log("🍕 NOVO PAGAMENTO RECEBIDO");
+    console.log("==============================");
+
+    try {
+
+        const dados = req.body;
+
+        console.log(
+            "Método:",
+            dados.payment_method_id
+        );
+
+        console.log(
+            "Valor:",
+            dados.transaction_amount
+        );
+
+        console.log(
+            "Email:",
+            dados.payer?.email
+        );
+
+        // ==========================================
+        // VALIDAÇÕES
+        // ==========================================
+
+        if (!dados.transaction_amount) {
+
+            return res.status(400).json({
+                success: false,
+                error: "Valor do pagamento não informado."
+            });
+
+        }
+
+        if (!dados.payment_method_id) {
+
+            return res.status(400).json({
+                success: false,
+                error: "Método de pagamento não informado."
+            });
+
+        }
+
+        if (!dados.payer?.email) {
+
+            return res.status(400).json({
+                success: false,
+                error: "E-mail do comprador não informado."
+            });
+
+        }
+
+        // ==========================================
+        // PAGAMENTO
+        // ==========================================
+
+        const pagamento = {
+
+            transaction_amount:
+                Number(dados.transaction_amount),
+
+            description:
+                dados.description ||
+                "Pedido Pizza Prime",
+
+            payment_method_id:
+                dados.payment_method_id,
+
+            payer: {
+                email: dados.payer.email
+            },
+
+            external_reference:
+                `PIZZA-${Date.now()}`
+        };
+
+        // ==========================================
+        // CARTÃO
+        // ==========================================
+
+        if (dados.token) {
+
+            pagamento.token =
+                dados.token;
+
+        }
+
+        if (dados.installments) {
+
+            pagamento.installments =
+                Number(dados.installments);
+
+        }
+
+        if (dados.issuer_id) {
+
+            pagamento.issuer_id =
+                Number(dados.issuer_id);
+
+        }
+
+        // ==========================================
+        // IDEMPOTÊNCIA
+        // ==========================================
+
+        const idempotencyKey =
+            crypto.randomUUID();
+
+        console.log(
+            "Enviando pagamento para o Mercado Pago..."
+        );
+
+        // ==========================================
+        // CRIAR PAGAMENTO
+        // ==========================================
+
+        const resultado =
+            await payment.create({
+
+                body: pagamento,
+
+                requestOptions: {
+
+                    customHeaders: {
+
+                        "X-Idempotency-Key":
+                            idempotencyKey
+
+                    }
+
+                }
+
+            });
+
+        // ==========================================
+        // RESULTADO
+        // ==========================================
+
+        console.log(
+            "✅ Pagamento criado!"
+        );
+
+        console.log(
+            "ID:",
+            resultado.id
+        );
+
+        console.log(
+            "Status:",
+            resultado.status
+        );
+
+        console.log(
+            "Detalhes:",
+            resultado.status_detail
+        );
+
+        console.log("==============================");
+        console.log("");
+
+        return res.status(200).json({
+
+            success: true,
+
+            id:
+                resultado.id,
+
+            status:
+                resultado.status,
+
+            status_detail:
+                resultado.status_detail,
+
+            payment_method_id:
+                resultado.payment_method_id,
+
+            payment_type_id:
+                resultado.payment_type_id
+
+        });
+
+    } catch (error) {
+
+        console.error("");
+        console.error(
+            "❌ ERRO AO PROCESSAR PAGAMENTO:"
+        );
+
+        console.error(error);
+
+        return res.status(500).json({
+
+            success: false,
+
+            error:
+                "Não foi possível processar o pagamento.",
+
+            details:
+                error.message
+
+        });
+
+    }
+
+});
+
+// ==================================================
+// INICIAR SERVIDOR
+// ==================================================
+
+app.listen(PORT, () => {
+
+    console.log("");
+    console.log("======================================");
+    console.log("🍕 PIZZA PRIME");
+    console.log("======================================");
+
+    console.log(
+        `Servidor rodando na porta ${PORT}`
+    );
+
+    console.log(
+        `Site: http://localhost:${PORT}/index.html`
+    );
+
+    console.log(
+        `Pagamento: http://localhost:${PORT}/pagamento.html`
+    );
+
+    console.log("======================================");
+    console.log("");
+
+});
