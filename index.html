@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="Pt-Br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pizza Prime</title>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <img class="logo_pizza" src="pizza_logo.png" width="100px" alt="logo" />
+      <div class="botoes">
+        <button class="btn1"><a href="index.html">INICIO</a></button>
+        <button class="btn2"><a href="cardapio.html">CARDÁPIO</a></button>
+        <button class="btn3"><a href="sobrenos.html">SOBRE NÓS</a></button>
+        <button class="btn4"><a href="avaliacoes.html">AVALIAÇÕES</a></button>
+        <button class="btn5"><a href="contato.html">CONTATO</a></button>
+        <button class="btn6">
+          <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        </button>
+        <button id="btn_pedido">
+          <a id="fazer_pedido" href="">FAZER PEDIDO</a>
+        </button>
+      </div>
+
+      <i class="fa-solid fa-bars menu-hamburguer"></i>
+    </header>
+
+    <nav class="nav_banner">
+      <div id="textos_banner">
+       
+        <div>
+         
+        </div>
+      </div>
+ 
+      <div class="banner">
+              <img class="img" src="fundo_saborqueconquista.png" alt="" />
+      <button class="btn_Banner"><a href="">Fazer pedido</a></button>
+      </div>
+
+
+     
+    </nav>
+    <h1 class="nav_Pizzas">Nossas Pizzas</h1>
+    <nav class="pizzas">
+      <div class="div_pizzas_cards">
+        <div class="card1">
+          <img class="pizza_calabresa" src="pizza.calabresa.jpg" alt="" />
+          <h4>Calabresa</h4>
+          <p>Calabresa, cebola, mussarela e orégano.</p>
+          <span>R$49,90</span>
+        </div>
+
+        <div class="card2">
+          <img class="pizza_portuguesa" src="pizza.portuguesa.jpg" alt="" />
+          <h4>Portuguesa</h4>
+          <p>
+            Presunto, ovos, cebola, <br />
+            pimentão, mussarela e orégano.
+          </p>
+          <span>R$54,90</span>
+
+        </div>
+
+        <div class="card3">
+          <img class="pizza_frangocomcatupiry" src="frango.com.catupiry.jpg" alt="">
+          <h4>Frango com catupiry</h4>
+          <p>
+            Frango desfiado, catupiry, <br />
+            mussarela e orégano
+          </p>
+          <span>R$54,90</span>
+        </div>
+
+        <div class="card4">
+          <img
+            class="pizza_quatroqueijos"
+            src="pizza.quatroqueijos.jpg"
+            alt=""
+          />
+          <h4>QUATRO QUEIJOS</h4>
+          <p>
+            Mussarela, parnesão, gorgonzola, <br />
+            provolone e orégano.
+          </p>
+          <span>R$59,90</span>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>
+
+
+<script>
+  const menu = document.querySelector(".botoes");
+const botao = document.querySelector(".menu-hamburguer");
+
+botao.addEventListener("click", () => {
+    menu.classList.toggle("ativo");
+});
+</script>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="Pt-Br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pizza Prime</title>
+  <link rel="stylesheet" href="sobrenos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+</head>
+
+<body>
+  <header>
+    <img class="logo_pizza" src="pizza_logo.png" width="100px" alt="logo" />
+    <div class="botoes">
+      <button><a href="index.html">INICIO</a></button>
+      <button><a href="cardapio.html">CARDÁPIO</a></button>
+      <button><a href="sobrenos.html">SOBRE NÓS</a></button>
+      <button><a href="avaliacoes.html">AVALIAÇÕES</a></button>
+      <button><a href="contato.html">CONTATO</a></button>
+      <button class="">
+        <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
+      </button>
+      <button id="btn_pedido">
+        <a id="fazer_pedido" href="">FAZER PEDIDO</a>
+      </button>
+    </div>
+
+    <i class="fa-solid fa-bars menu-hamburguer"></i>
+  </header>
+
+  <nav class="tudo">
+    <h1 class="titulo">SOBRE NÓS</h1>
+    <div>
+      <h2 class="subtitulo">
+        Paixão por pizzas, dedicação em <br />
+        cada detalhe!
+      </h2>
+      <p class="texto">
+        A pizza Prime nasceu em 2016 com o <br />
+        sonho de trazer o verdadeiro sabor da <br />
+        pizza para nossa cidade. Utilizamos <br />
+        ingredientes selecionados e muito amor <br />
+        em cada receita para oferecer a melhor <br />
+        experiência para você.
+      <div>
+        <p class="continuacao_texto">Nosso compromisso é com a qualidade, <br>
+          o sabor e, principalmente com você!</p>
+      </div>
+      </p>
+    </div>
+
+    <div class="imgs">
+      <div class="pizza_icone">
+        <img src="pizzaicone.png" width="40px" alt="">
+        <p>INGREDIENTES <br> SELECIONADOS</p>
+      </div>
+      <div class="fogaoalenha_icone">
+        <img src="fogaoalenha.png" width="40px" alt="">
+        <p>FORNO A <br> LENHA</p>
+      </div>
+      <div class="entrega_rapida_icone">
+        <img src="entregarapida_icone.png" width="40px" alt="">
+        <p>ENTREGA <br> RÁPIDA</p>
+      </div> 
+    
+    </div>
+       <div class="fazerpedido">
+        <a href="">FAZER PEDIDO</a>
+       </div>
+    
+       <div>
+        <h2 class="nossahistoria_titulo">NOSSA HISTÓRIA</h2>
+        <p class="nossahistoria_paragrafo">Começamos como uma pequena pizzaria de bairro e, com <br>
+        muito trabalho e dedicação, conquistamos o coração dos <br>
+        nosso clientes. Hoje somos referência em sabor e qualidade, <br> mas continuamos com a mesma missão: <br>
+        <span>fazer você se sentir em casa.</span></p>
+       </div>
+     
+
+  </nav>
+</body>
+
+</html>
+
+<script>
+  const menu = document.querySelector(".botoes");
+  const botao = document.querySelector(".menu-hamburguer");
+
+  botao.addEventListener("click", () => {
+    menu.classList.toggle("ativo");
+  });
+</script>
