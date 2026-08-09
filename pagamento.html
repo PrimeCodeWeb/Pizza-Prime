@@ -246,7 +246,70 @@
 
     const bricksBuilder = mp.bricks();
 
+    async function acompanharPagamento(paymentId) {
 
+        console.log(
+            "👀 Acompanhando pagamento:",
+            paymentId
+        );
+
+        const intervalo = setInterval(async () => {
+
+            try {
+
+                const response = await fetch(
+                    `/payment_status/${paymentId}`
+                );
+
+                const result = await response.json();
+
+                console.log(
+                    "Status atual:",
+                    result.status
+                );
+
+                if (result.status === "approved") {
+
+                    clearInterval(intervalo);
+
+                    alert(
+                        "Pagamento confirmado! 🎉🍕"
+                    );
+
+                    localStorage.removeItem(
+                        "carrinho"
+                    );
+
+                    localStorage.removeItem(
+                        "carrinhoPagamento"
+                    );
+
+                    window.location.href =
+                        "index.html";
+                }
+
+                if (
+                    result.status === "rejected" ||
+                    result.status === "cancelled"
+                ) {
+
+                    clearInterval(intervalo);
+
+                    alert(
+                        "O pagamento não foi aprovado."
+                    );
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Erro ao verificar pagamento:",
+                    error
+                );
+            }
+
+        }, 5000);
+    }
     // ==========================================
     // 5. PAYMENT BRICK
     // ==========================================
@@ -271,7 +334,7 @@
 
                     debitCard: "all",
 
-                     bankTransfer:[ "pix"] 
+                    bankTransfer: ["pix"]
                 }
 
             },
@@ -457,6 +520,8 @@
                                 result.qr_code
                             ) {
 
+
+
                                 const pixResultado =
                                     document.getElementById("pixResultado");
 
@@ -539,7 +604,7 @@
                                 document
                                     .getElementById("paymentBrick_container")
                                     .style.display = "none";
-
+                                acompanharPagamento(result.id);
                                 return;
                             }
 
@@ -547,6 +612,7 @@
                             alert(
                                 "Pagamento pendente. Aguarde a confirmação."
                             );
+
 
                             return;
                         }

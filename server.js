@@ -266,6 +266,39 @@ app.post("/process_payment", async (req, res) => {
 // INICIAR SERVIDOR
 // ==========================================
 
+ app.get("/payment_status/:id", async (req, res) => {
+
+    try {
+
+        const paymentId = req.params.id;
+
+        const resultado = await payment.get({
+            id: paymentId
+        });
+
+        return res.json({
+            success: true,
+            id: resultado.id,
+            status: resultado.status,
+            status_detail: resultado.status_detail
+        });
+
+    } catch (error) {
+
+        console.error(
+            "❌ Erro ao consultar pagamento:",
+            error
+        );
+
+        return res.status(500).json({
+            success: false,
+            error: "Erro ao consultar pagamento."
+        });
+    }
+
+});
+
+
 app.listen(PORT, () => {
 
     console.log("");
