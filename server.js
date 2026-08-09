@@ -1,8 +1,8 @@
-
 const express = require("express");
 const cors = require("cors");
 const crypto = require("crypto");
 const path = require("path");
+
 const {
     MercadoPagoConfig,
     Payment
@@ -51,7 +51,7 @@ const client = new MercadoPagoConfig({
 const payment = new Payment(client);
 
 // ==========================================
-// TESTE
+// TESTE DO SERVIDOR
 // ==========================================
 
 app.get("/teste", (req, res) => {
@@ -76,9 +76,20 @@ app.post("/process_payment", async (req, res) => {
 
         const dados = req.body;
 
-        console.log("Método:", dados.payment_method_id);
-        console.log("Valor:", dados.transaction_amount);
-        console.log("Email:", dados.payer?.email);
+        console.log(
+            "Método:",
+            dados.payment_method_id
+        );
+
+        console.log(
+            "Valor:",
+            dados.transaction_amount
+        );
+
+        console.log(
+            "Email:",
+            dados.payer?.email
+        );
 
         // ==========================================
         // VALIDAÇÕES
@@ -110,10 +121,12 @@ app.post("/process_payment", async (req, res) => {
         // ==========================================
 
         const pagamento = {
-            transaction_amount: Number(dados.transaction_amount),
+            transaction_amount:
+                Number(dados.transaction_amount),
 
             description:
-                dados.description || "Pedido Pizza Prime",
+                dados.description ||
+                "Pedido Pizza Prime",
 
             payment_method_id:
                 dados.payment_method_id,
@@ -173,6 +186,9 @@ app.post("/process_payment", async (req, res) => {
 
             });
 
+        console.log("=== RESPOSTA COMPLETA DO MERCADO PAGO ===");
+        console.log(JSON.stringify(resultado, null, 2));
+
         // ==========================================
         // RESULTADO
         // ==========================================
@@ -180,6 +196,7 @@ app.post("/process_payment", async (req, res) => {
         console.log("✅ Pagamento criado!");
         console.log("ID:", resultado.id);
         console.log("Status:", resultado.status);
+
         console.log(
             "Detalhes:",
             resultado.status_detail
@@ -203,8 +220,22 @@ app.post("/process_payment", async (req, res) => {
                 resultado.payment_method_id,
 
             payment_type_id:
-                resultado.payment_type_id
+                resultado.payment_type_id,
 
+                   qr_code:
+                resultado.point_of_interaction
+                    ?.transaction_data
+                    ?.qr_code,
+
+            qr_code_base64:
+                resultado.point_of_interaction
+                    ?.transaction_data
+                    ?.qr_code_base64,
+
+            ticket_url:
+                resultado.point_of_interaction
+                    ?.transaction_data
+                    ?.ticket_url
         });
 
     } catch (error) {
@@ -216,6 +247,8 @@ app.post("/process_payment", async (req, res) => {
 
         console.error(error);
 
+        console.error("");
+
         return res.status(500).json({
 
             success: false,
@@ -225,7 +258,6 @@ app.post("/process_payment", async (req, res) => {
 
             details:
                 error.message
-
         });
     }
 });
@@ -256,4 +288,11 @@ app.listen(PORT, () => {
     console.log("======================================");
     console.log("");
 });
+
+console.log(
+    "TOKEN MP:",
+    process.env.MERCADOPAGO_ACCESS_TOKEN
+        ? "CARREGADO"
+        : "NÃO CARREGADO"
+);
 

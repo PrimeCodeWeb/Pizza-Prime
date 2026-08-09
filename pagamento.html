@@ -3,97 +3,157 @@
 <html lang="pt-BR">
 
 <head>
+    <meta charset="UTF-8">
 
-```
-<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - Pizza Prime</title>
 
-<title>Pagamento - Pizza Prime</title>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
 
-<script src="https://sdk.mercadopago.com/js/v2"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-<style>
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
 
-    * {
-        box-sizing: border-box;
-    }
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
 
-    body {
-        margin: 0;
-        padding: 30px 15px;
-        font-family: Arial, sans-serif;
-        background: #f5f5f5;
-    }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
 
-    .container {
-        max-width: 700px;
-        margin: auto;
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    }
+        .subtitulo {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
 
-    h1 {
-        text-align: center;
-        margin-bottom: 10px;
-    }
+        #resumoPedido {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f7f7f7;
+            border-radius: 10px;
+        }
 
-    .subtitulo {
-        text-align: center;
-        color: #666;
-        margin-bottom: 30px;
-    }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
 
-    #resumoPedido {
-        margin-bottom: 30px;
-        padding: 20px;
-        background: #f7f7f7;
-        border-radius: 10px;
-    }
+        .total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-    .item {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px 0;
-        border-bottom: 1px solid #ddd;
-    }
+        #paymentBrick_container {
+            margin-top: 20px;
+        }
 
-    .total {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 15px;
-        font-size: 20px;
-        font-weight: bold;
-    }
+        #pixResultado {
+            margin-top: 25px;
+        }
 
-    #paymentBrick_container {
-        margin-top: 20px;
-    }
+        .pix-box {
+            text-align: center;
+            padding: 25px;
+            background: #f7f7f7;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+        }
 
-</style>
-```
+        .pix-box h2 {
+            margin-top: 0;
+            color: #222;
+        }
+
+        .pix-box p {
+            color: #555;
+        }
+
+        .pix-qrcode {
+            width: 220px;
+            max-width: 100%;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .pix-titulo {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #codigoPix {
+            width: 100%;
+            min-height: 110px;
+            resize: none;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 13px;
+            word-break: break-all;
+        }
+
+        #btnCopiarPix {
+            margin-top: 15px;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #009ee3;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #btnCopiarPix:hover {
+            opacity: 0.9;
+        }
+
+        .pix-aviso {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
 
 </head>
 
 <body>
+    <div class="container">
 
-```
-<div class="container">
+        <h1>🍕 Finalizar Pedido</h1>
 
-    <h1>🍕 Finalizar Pedido</h1>
+        <p class="subtitulo">
+            Confira seu pedido e escolha a forma de pagamento.
+        </p>
 
-    <p class="subtitulo">
-        Confira seu pedido e escolha a forma de pagamento.
-    </p>
+        <div id="resumoPedido"></div>
 
-    <div id="resumoPedido"></div>
+        <div id="paymentBrick_container"></div>
+        <div id="pixResultado"></div>
+    </div>
+</body>
 
-    <div id="paymentBrick_container"></div>
-
-</div>
-
+</html>
 <script>
 
     // ==========================================
@@ -385,19 +445,110 @@
                         // ==========================================
                         // PAGAMENTO PENDENTE
                         // ==========================================
+                        if (result.status === "pending") {
 
-                        if (
-                            result.status === "pending"
-                        ) {
+                            // ==============================
+                            // PIX
+                            // ==============================
+
+                            if (
+                                result.payment_method_id === "pix" &&
+                                result.qr_code
+                            ) {
+
+                                const pixResultado =
+                                    document.getElementById("pixResultado");
+
+                                pixResultado.innerHTML = `
+            <div class="pix-box">
+
+                <h2>PIX gerado com sucesso! 🍕</h2>
+
+                <p>
+                    Escaneie o QR Code ou copie o código PIX abaixo.
+                </p>
+
+                ${result.qr_code_base64
+                                        ? `
+                        <img
+                            class="pix-qrcode"
+                            src="data:image/png;base64,${result.qr_code_base64}"
+                            alt="QR Code PIX"
+                        >
+                    `
+                                        : ""
+                                    }
+
+                <p class="pix-titulo">
+                    PIX Copia e Cola
+                </p>
+
+                <textarea
+                    id="codigoPix"
+                    readonly
+                >${result.qr_code}</textarea>
+
+                <button
+                    type="button"
+                    id="btnCopiarPix"
+                >
+                    Copiar código PIX
+                </button>
+
+                <p class="pix-aviso">
+                    Após realizar o pagamento,
+                    aguarde a confirmação.
+                </p>
+
+            </div>
+        `;
+
+                                document
+                                    .getElementById("btnCopiarPix")
+                                    .addEventListener("click", async () => {
+
+                                        try {
+
+                                            await navigator.clipboard.writeText(
+                                                result.qr_code
+                                            );
+
+                                            alert("Código PIX copiado! ✅");
+
+                                        } catch (error) {
+
+                                            console.error(
+                                                "Erro ao copiar PIX:",
+                                                error
+                                            );
+
+                                            const campo =
+                                                document.getElementById("codigoPix");
+
+                                            campo.select();
+
+                                            document.execCommand("copy");
+
+                                            alert("Código PIX copiado! ✅");
+
+                                        }
+
+                                    });
+
+                                document
+                                    .getElementById("paymentBrick_container")
+                                    .style.display = "none";
+
+                                return;
+                            }
+
 
                             alert(
                                 "Pagamento pendente. Aguarde a confirmação."
                             );
 
                             return;
-
                         }
-
 
                         // ==========================================
                         // PAGAMENTO REJEITADO
@@ -487,8 +638,3 @@
     renderPaymentBrick();
 
 </script>
-```
-
-</body>
-
-</html>
